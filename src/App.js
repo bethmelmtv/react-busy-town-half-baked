@@ -11,28 +11,12 @@ function App() {
   // traffic is complicated. It should be an array of strings that starts out as ['car', 'truck']
 
   const [lightColor, setLightColor] = useState('red');
-  const [lizardSize, setLizardSize] = useState('10');
-  const [alienSize, setAlienSize] = useState('10');
+  const [lizardSize, setLizardSize] = useState(10);
+  const [alienSize, setAlienSize] = useState(10);
   const [traffic, setTraffic] = useState(['car', 'truck']);
 
-  const ATTACK_MODIFIER = 1;
+  const ATTACK = 1;
 
-
-  function goblinEatsElectricity() {
-    setAlienSize(alienSize - ATTACK_MODIFIER);
-  }
-
-  function alienZapsLizard() {
-    setLizardSize(lizardSize - ATTACK_MODIFIER);
-  }
-
-  function lizardGrows() {
-    setLizardSize(lizardSize + ATTACK_MODIFIER);
-  }
-
-  function alienGrows() {
-    setAlienSize(alienSize + ATTACK_MODIFIER);
-  }
 
   function yellow() {
     setLightColor('yellow');
@@ -75,19 +59,19 @@ function App() {
           <img src="alien.png" style = {{ width: alienSize * 10 }} />
           <div className='buttons'>
             {/* when you click this button, the alien's size in state should go up by one */}
-            <button onClick = {goblinEatsElectricity}>Oh no! The alien is gobblin up all the electricity!</button>
+            <button onClick = {() => setAlienSize(alienSize + ATTACK)}>Oh no! The alien is gobblin up all the electricity!</button>
             {/* when you click this button, the lizard's size in state should go down by one */}
-            <button onClick = {alienZapsLizard}>Amazing! The alien zapped the lizard!</button>
+            <button onClick = {() => setLizardSize(lizardSize - ATTACK)}>Amazing! The alien zapped the lizard!</button>
           </div>
         </div>
         <div className="monster">
           {/* the width of the lizard should be ten times whatever the alien size is in state */}
-          <img src="lizard.png" style = {{ width: alienSize * 10 }} />
+          <img src="lizard.png" style = {{ width: lizardSize * 10 }} />
           <div className="buttons">
             {/* when you click this button, the lizard's size in state should go up by one */}
-            <button onClick= {lizardGrows}>Yegads! The lizard is ramping up to its final form!</button>
+            <button onClick= {() => setLizardSize(lizardSize + ATTACK)}>Yegads! The lizard is ramping up to its final form!</button>
             {/* when you click this button, the alien's size in state should go up by one */}
-            <button onClick={alienGrows}>Oh my! The lizard chomped down on the alien!</button>
+            <button onClick={() => setAlienSize(alienSize + ATTACK)}>Oh my! The lizard chomped down on the alien!</button>
           </div>
         </div>
       </div>
